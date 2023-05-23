@@ -1,0 +1,150 @@
+* {
+  --canvas-size: 400px;
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  --bgc: #fff;
+  --gameareacolor: #bdd1ec;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  transition: 0.5s;
+}
+
+.container.dark {
+  --bgc: #302f2f;
+  --textcolor: #a6acb6;
+  --gameareacolor: #4d648a;
+  background-color: var(--bgc);
+  color: var(--textcolor);
+  transition: 0.5s;
+}
+.main {
+  position: relative;
+  background-color: var(--gameareacolor);
+  box-shadow: 0 0 5px 5px #89a0e0;
+}
+
+.dif-section {
+  height: 40px;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1rem;
+  align-items: center;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  height: 100px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 24px;
+}
+
+.header span {
+  justify-self: center;
+}
+
+.header__input {
+  width: 20px;
+  height: max-content;
+  background-color: var(--gameareacolor);
+  outline: none;
+  
+}
+
+.btn {
+  width: max-content;
+  height: max-content;
+  background-color: var(--bgc);
+  color: var(--textcolor);
+  border: none;
+  padding: 0.5rem;
+  transition: 0.5s all;
+}
+
+.btn:hover {
+  color: #89a0e0;
+  transition: 0.5s all;
+  box-shadow: 0 0 10px 10px #89a0e0;
+}
+
+.header__restart-btn {
+  background-color: var(--gameareacolor);
+}
+.canvas {
+}
+
+.canvas-blocker {
+  background-color: transparent;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+}
+
+.end-words {
+  position: absolute;
+  bottom: 45%;
+  width: 100%;
+  font-size: 80px;
+  text-align: center;
+  color: blue;
+}
+
+.score-container {
+  background-color: var(--bgc);
+  display: none;
+}
+.score-container.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 1000;
+  width: 80%;
+  height: 80%;
+  background-color: var(--bgc);
+}
+
+.scoreboard {
+  position: absolute;
+  z-index: 1000;
+  background-color: var(--bgc);
+  width: 80%;
+  height: 80%;
+  font-size: 30px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .header {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: "turns restart time" "bombs bombs bombs-input";
+  }
+  .header__turn-counter {
+    grid-area: turns;
+  }
+  .header__restart-btn {
+    grid-area: restart;
+  }
+  .header__timer {
+    grid-area: time;
+  }
+  .header__bombs-word {
+    grid-area: bombs;
+  }
+  .header__input {
+    grid-area: bombs-input;
+  }
+}
