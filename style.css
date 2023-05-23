@@ -43,7 +43,7 @@ body {
 
 .header {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 20px 20px repeat(4, 1fr);
   align-items: center;
   height: 100px;
   font-family: Georgia, "Times New Roman", Times, serif;
@@ -128,12 +128,15 @@ body {
 
 @media (max-width: 768px) {
   .header {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 20px 20px 1fr 1fr;
     grid-template-rows: repeat(2, 1fr);
-    grid-template-areas: "turns restart time" "bombs bombs bombs-input";
+    grid-template-areas: "turns flags restart time" "bombs bombs bombs bombs-input ";
   }
   .header__turn-counter {
     grid-area: turns;
+  }
+  .header__flag-counter {
+    grid-area: flags;
   }
   .header__restart-btn {
     grid-area: restart;

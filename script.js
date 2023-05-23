@@ -2,6 +2,7 @@ const container = document.createElement("div");
 const gameArea = document.createElement("main");
 const header = document.createElement("header");
 const turnCounter = document.createElement("span");
+const flagCounter = document.createElement("span");
 const bombsWord = document.createElement("span");
 const restartBtn = document.createElement("button");
 const timer = document.createElement("span");
@@ -63,6 +64,7 @@ const addCssClasses = () => {
   gameArea.classList.add("main");
   header.classList.add("header");
   turnCounter.classList.add("header__turn-counter");
+  flagCounter.classList.add("header__flag-counter");
   restartBtn.classList.add("header__restart-btn");
   timer.classList.add("header__timer");
   canvas.classList.add("canvas");
@@ -98,6 +100,7 @@ const appendHtml = () => {
   gameArea.appendChild(canvas);
   gameArea.appendChild(canvasBlocker);
   header.appendChild(turnCounter);
+  header.appendChild(flagCounter);
   header.appendChild(restartBtn);
   header.appendChild(timer);
   header.appendChild(bombsWord);
@@ -127,6 +130,7 @@ timer.innerText = time;
 let isGameOver = false;
 
 let flaggedCells = 0;
+flagCounter.innerText = flaggedCells;
 
 let bombsAmount = 10;
 bombsInput.value = 10;
@@ -299,6 +303,7 @@ function drawFlag(cell) {
 
 function flagCouter() {
   flaggedCells = grid.flat().filter((item) => item.hasFlag).length;
+  flagCounter.innerText = flaggedCells;
 }
 
 canvas.addEventListener("contextmenu", (event) => {
@@ -501,6 +506,12 @@ const loadProgress = () => {
     turnCounter.innerText = turnCount;
     timer.innerText = time;
     bombsInput.value = bombsAmount;
+    if (settings.flaggedCells) {
+      flaggedCells = settings.flags;
+      flagCounter.innerText = flaggedCells;
+    }
+    
+
 
     changeCanvasSize();
     timeCounter();
@@ -560,7 +571,7 @@ function writeScore() {
 writeScore();
 
 function saveSettings() {
-  const currSettings = new GameInfo(area, bombsAmount, turnCount, time);
+  const currSettings = new GameInfo(area, bombsAmount, turnCount, time, flaggedCells);
   localStorage.setItem("settings", JSON.stringify(currSettings));
 }
 
