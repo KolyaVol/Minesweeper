@@ -1,10 +1,16 @@
 const container = document.createElement("div");
 const gameArea = document.createElement("main");
 const header = document.createElement("header");
+const turnCounterContainer = document.createElement("div");
+const turnCounterTitle = document.createElement("span");
 const turnCounter = document.createElement("span");
+const flagCounterContainer = document.createElement("div");
+const flagCounterTitle = document.createElement("span");
 const flagCounter = document.createElement("span");
 const bombsWord = document.createElement("span");
 const restartBtn = document.createElement("button");
+const timerContainer = document.createElement("div");
+const timerTitle = document.createElement("span");
 const timer = document.createElement("span");
 const difSection = document.createElement("section");
 const ezDif = document.createElement("button");
@@ -57,16 +63,20 @@ normDif.innerText = "Normal";
 hardDif.innerText = "Hard";
 openScore.innerText = "Score";
 themeBtn.innerText = "Theme";
+turnCounterTitle.innerText = "T";
+flagCounterTitle.innerText = "F";
+timerTitle.innerText = "Time";
 bombsInput.setAttribute("type", "text");
+
 
 const addCssClasses = () => {
   container.classList.add("container");
   gameArea.classList.add("main");
   header.classList.add("header");
-  turnCounter.classList.add("header__turn-counter");
-  flagCounter.classList.add("header__flag-counter");
+  turnCounterContainer.classList.add("header__turn-counter");
+  flagCounterContainer.classList.add("header__flag-counter");
   restartBtn.classList.add("header__restart-btn");
-  timer.classList.add("header__timer");
+  timerContainer.classList.add("header__timer");
   canvas.classList.add("canvas");
   canvasBlocker.classList.add("canvas-blocker");
   difSection.classList.add("dif-section");
@@ -99,10 +109,16 @@ const appendHtml = () => {
   gameArea.appendChild(header);
   gameArea.appendChild(canvas);
   gameArea.appendChild(canvasBlocker);
-  header.appendChild(turnCounter);
-  header.appendChild(flagCounter);
+  header.appendChild(turnCounterContainer);
+  turnCounterContainer.appendChild(turnCounterTitle);
+  turnCounterContainer.appendChild(turnCounter);
+  header.appendChild(flagCounterContainer);
+  flagCounterContainer.appendChild(flagCounterTitle);
+  flagCounterContainer.appendChild(flagCounter);
   header.appendChild(restartBtn);
-  header.appendChild(timer);
+  header.appendChild(timerContainer);
+  timerContainer.appendChild(timerTitle);
+  timerContainer.appendChild(timer);
   header.appendChild(bombsWord);
   header.appendChild(bombsInput);
   difSection.appendChild(ezDif);
@@ -338,7 +354,6 @@ canvas.addEventListener("click", (event) => {
       }
     } else {
       gameOver();
-      ;
     }
   } else {
     checkWin();
@@ -510,8 +525,6 @@ const loadProgress = () => {
       flaggedCells = settings.flags;
       flagCounter.innerText = flaggedCells;
     }
-    
-
 
     changeCanvasSize();
     timeCounter();
@@ -571,7 +584,13 @@ function writeScore() {
 writeScore();
 
 function saveSettings() {
-  const currSettings = new GameInfo(area, bombsAmount, turnCount, time, flaggedCells);
+  const currSettings = new GameInfo(
+    area,
+    bombsAmount,
+    turnCount,
+    time,
+    flaggedCells
+  );
   localStorage.setItem("settings", JSON.stringify(currSettings));
 }
 

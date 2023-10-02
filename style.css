@@ -43,11 +43,19 @@ body {
 
 .header {
   display: grid;
-  grid-template-columns: 20px 20px repeat(4, 1fr);
+  grid-template-columns: 30px 30px repeat(4, 1fr);
   align-items: center;
   height: 100px;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 24px;
+}
+.header__turn-counter, .header__flag-counter, .header__timer {
+  font-size: inherit;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .header span {
@@ -59,7 +67,6 @@ body {
   height: max-content;
   background-color: var(--gameareacolor);
   outline: none;
-  
 }
 
 .btn {
@@ -80,8 +87,6 @@ body {
 
 .header__restart-btn {
   background-color: var(--gameareacolor);
-}
-.canvas {
 }
 
 .canvas-blocker {
@@ -112,7 +117,7 @@ body {
   position: absolute;
   z-index: 1000;
   width: 80%;
-  height: 80%;
+  height: 100%;
   background-color: var(--bgc);
 }
 
@@ -124,6 +129,13 @@ body {
   height: 80%;
   font-size: 30px;
   text-align: center;
+}
+.scoreboard caption {
+  margin-bottom: 2rem;
+}
+.scoreboard tbody {
+  margin-top: 10vh;
+  vertical-align: text-top;
 }
 
 @media (max-width: 768px) {
