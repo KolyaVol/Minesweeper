@@ -68,7 +68,6 @@ flagCounterTitle.innerText = "F";
 timerTitle.innerText = "Time";
 bombsInput.setAttribute("type", "text");
 
-
 const addCssClasses = () => {
   container.classList.add("container");
   gameArea.classList.add("main");
@@ -242,6 +241,8 @@ function drawGrid() {
 drawGrid();
 
 function drawCell(cell) {
+  const posX = cell.x + cellSize * 0.45;
+  const posY = cell.y + cellSize * 0.6;
   context.stroke();
   if (!cell.isRevealed) {
     context.fillStyle = "red";
@@ -255,50 +256,32 @@ function drawCell(cell) {
       context.fillStyle = "#fff";
       context.font = "14px Arial";
       context.fillRect(cell.x, cell.y, cellSize, cellSize);
+
       switch (cell.neighborCount) {
         case 0:
           break;
         case 1:
           context.fillStyle = "green";
-          context.fillText(
-            cell.neighborCount,
-            cell.x + cellSize / 3,
-            cell.y + (cellSize * 2) / 3
-          );
+
           break;
         case 2:
           context.fillStyle = "yellowgreen";
-          context.fillText(
-            cell.neighborCount,
-            cell.x + cellSize / 3,
-            cell.y + (cellSize * 2) / 3
-          );
+
           break;
         case 3:
           context.fillStyle = "orange";
-          context.fillText(
-            cell.neighborCount,
-            cell.x + cellSize / 3,
-            cell.y + (cellSize * 2) / 3
-          );
+
           break;
         case 4:
           context.fillStyle = "red";
-          context.fillText(
-            cell.neighborCount,
-            cell.x + cellSize / 3,
-            cell.y + (cellSize * 2) / 3
-          );
+
           break;
         default:
           context.fillStyle = "brown";
-          context.fillText(
-            cell.neighborCount,
-            cell.x + cellSize / 3,
-            cell.y + (cellSize * 2) / 3
-          );
+
           break;
       }
+      context.fillText(cell.neighborCount, posX, posY);
     }
   }
 }
